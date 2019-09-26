@@ -1,0 +1,77 @@
+import pandas as pd
+
+* Pandas series
+    * labels = ['a','b','c']
+    * my_data = [10,20,30]
+    * arr = np.array(my_data)
+    * d = {'a':10,'b':20,'c':30}
+    * s1=pd.Series(data=my_data) (you’ll get default labels 0, 1, 2, ..)
+    * s2=pd.Series(data=my_data, index=labels)
+    * s3=pd.Series(arr, labels)
+    * s4=pd.Series(d)
+* DataFrame - creation, read from files
+    * What is a DataFrame?
+        * a two-dimensional Pandas data structure
+        * columns represent features, rows represent items
+        * analogous to an Excel spreadsheet or SQL table
+    * Method 1
+        * matrix_data = np.random.randint(1,20,size=20).reshape(5,4)
+        * row_labels = ['A','B','C','D','E']
+        * column_headings = ['W','X','Y','Z']
+        * df = pd.DataFrame(data=matrix_data, index=row_labels, columns=column_headings)
+    * Method 2
+        * d={'a':[10,20],'b':[30,40],'c':[50,60]}
+        * df2=pd.DataFrame(data=d,index=['X','Y'])
+    * Method 3
+        * df3 = pd.read_csv("Data/wine.data.csv")
+    * Method 4
+        * df4 = pd.read_excel("./Data/Height_Weight.xlsx")
+* Quick checking DataFrame
+    * df3.head()
+    * df3.head(3)
+    * df3.tail(7)
+    * df3.sample(5)
+    * df3.info()
+    * df3.describe().transpose()
+    * df4.describe()
+* Descriptive stats on DataFrame
+    * df3.mean()
+    * df3.std()
+    * df4.var()
+    * df4.min()
+    * df4.max()
+* Indexing, slicing
+    * df4['Name']
+    * df4[['Name','Weight']]
+    * Label-based 'loc' method can be used for selecting row(s)
+        * df.loc['C']
+        * df.loc[['B','C']]
+    * Index position based 'iloc' method can be used for selecting row(s)
+        * df.iloc[2]
+        * df.iloc[[1,2]]
+* Conditional subsetting
+    * df4['Height']>155
+    * df4[df4['Height']>155]
+    * df4[(df4['Height']>155) & (df4['Weight']<140)]
+* Operations on specific rows/columns
+    * df3[['Magnesium','Ash']].std()
+    * range_alcohol=df3['Alcohol'].max()- df3['Alcohol'].min()
+    * np.percentile(df3['Flavanoids'],95) - Top 5 percentile in terms of Flavanoids?
+    * df3[df3['Flavanoids']>=3.4975]
+    * df3[df3['Flavanoids']>=3.4975][['Ash','Alcohol','Magnesium']].mean() - Show the average alcohol, ash, and magnesium content of the wine brands which rank top 5 percent in terms of flavanoids
+* Create new column as a function of existing columns
+    * df4['BMI']=df4['Weight']*0.453592/(df4['Height']/100)**2
+    * df4.sort_values(by='BMI')
+    * df4.sort_values(by='BMI',inplace=True) - Use inplace=True to make the changes reflected on the original DataFrame
+* Visualization
+    * Set style
+        * # Just to set the Matplotlib style to default
+        * import matplotlib as mpl
+        * mpl.rcParams.update(mpl.rcParamsDefault)
+    * Scatter plot
+        * df.plot.scatter('Alcohol','Color intensity')
+        * plt.show()
+    * Histogram
+        * df['Alcohol'].plot.hist(bins=20,figsize=(5,5),edgecolor='k')
+        * plt.xlabel('Alcohol percentage')
+        * plt.show()
