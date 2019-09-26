@@ -1,0 +1,74 @@
+import matplotlib.pyplot as plt
+
+* Scatter plot (basic)
+    * plt.scatter(age, height)
+    * plt.show()
+* Scatter plot (advanced)
+    * plt.figure(figsize=(8,6))
+    * plt.title("Plot of Age vs. Height (in cms)\n",fontsize=20, fontstyle='italic')
+    * plt.xlabel("Age (years)",fontsize=16)
+    * plt.ylabel("Height (cms)",fontsize=16)
+    * plt.grid (True)
+    * plt.ylim(100,200)
+    * plt.xticks([i*5 for i in range(12)],fontsize=15)
+    * plt.yticks(fontsize=15)
+    * plt.scatter(x=age,y=height,c='orange',s=150,edgecolors='k')
+    * plt.text(x=15,y=105,s="Height increaes up to around \n20 years and then tapers off",fontsize=15, rotation=30, linespacing=2)
+    * plt.text(x=22,y=185,s="Nobody has a height beyond 180 cm",fontsize=15)
+    * plt.vlines(x=20,ymin=100,ymax=180,linestyles='dashed',color='blue',lw=3)
+    * plt.hlines(y=180,xmin=0,xmax=55,linestyles='dashed',color='red',lw=3)
+    * plt.legend(['Height in cms'],loc=2,fontsize=14)
+    * plt.show()
+* Bar chart
+    * plt.figure(figsize=(12,4))
+    * plt.title("People's weight in kgs",fontsize=16, fontstyle='italic')
+    * plt.bar(x=people,height=weight, width=0.6,color='orange',edgecolor='k',alpha=0.6)
+    * plt.xlabel("People",fontsize=15)
+    * plt.xticks(fontsize=14,rotation=30)
+    * plt.yticks(fontsize=14)
+    * plt.ylabel("Weight (in kgs)",fontsize=15)
+    * plt.show()
+* Histogram
+    * import numpy as np
+    * plt.figure(figsize=(7,5))
+    * plt.hist(weight,color='red',edgecolor='k', alpha=0.75,bins=5)
+    * plt.title("Histogram of patient weight",fontsize=18)
+    * plt.xlabel("Weight in kgs",fontsize=15)
+    * plt.xticks(fontsize=15)
+    * plt.yticks(fontsize=15)
+    * plt.show()
+* Simple line plot
+    * days = np.arange(1,31)
+    * candidate_A = 50+days*0.07+2*np.random.randn(30)
+    * candidate_B = 50-days*0.1+3*np.random.randn(30)
+    * 
+    * # Determine the minimum and maximum of stock prices
+    * ymin = min(candidate_A.min(),candidate_B.min())
+    * ymax = max(candidate_A.max(),candidate_B.max())
+    * # Set style
+    * plt.style.use('fivethirtyeight')
+    * 
+    * plt.figure(figsize=(12,5))
+    * plt.title("Time series plot of poll percentage over a month\n",fontsize=20, fontstyle='italic')
+    * plt.xlabel("Days",fontsize=16)
+    * plt.ylabel("Poll percentage (%)",fontsize=16)
+    * plt.grid (True)
+    * plt.ylim(ymin*0.98,ymax*1.02)
+    * plt.xticks([i*2 for i in range(16)],fontsize=14)
+    * plt.yticks(fontsize=15)
+    * 
+    * # Main plotting function - plot (note markersize, lw (linewidth) arguments)
+    * plt.plot(days,candidate_A,'o-',markersize=10,c='blue',lw=2)
+    * plt.plot(days,candidate_B,'^-',markersize=10,c='green',lw=2)
+    * 
+    * plt.legend(['Poll percentage of candidate A (%)', 'Poll percentage of candidate B (%)'],loc=2,fontsize=14)
+    * plt.show()
+* Box plot
+    * plt.style.use('ggplot')
+    * 
+    * # Note how to convert default numerical x-axis ticks to the list of string by passing two lists 
+    * plt.boxplot(x=[candidate_A,candidate_B],showmeans=True)
+    * plt.grid(True)
+    * plt.xticks([1,2],['Candidate A','Candidate B'])
+    * #plt.yticks(fontsize=15)
+    * plt.show()
