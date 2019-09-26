@@ -1,0 +1,19 @@
+import seaborn as sns
+
+* Box plot
+    * sns.boxplot(x='Class',y='Alcohol',data=df)
+* Violin plot (combination of boxplot and histogram/kernel density)
+    * sns.violinplot(x='Class',y='Alcohol',data=df)
+* regplot - computes and plots the linear regression fit along with confidence interval
+    * sns.regplot(x='Alcohol',y='Color intensity',data=df)
+    * plt.show()
+* lmplot - combination of regplot with grid to visualize across various groups/classes
+    * sns.lmplot(x='Alcohol',y='Color intensity',hue='Class',data=df)
+    * plt.show()
+* Correlation matrix and heat map
+    * import numpy as np
+    * np.cov(df[['Alcohol','Malic acid','Ash']],rowvar=False)
+    * corr_mat=np.corrcoef(df[df.columns[1:]],rowvar=False)
+    * corr_df = pd.DataFrame(corr_mat,columns=df.columns[1:],index=df.columns[1:])
+    * sns.heatmap(corr_df,linewidth=1,cmap='plasma')
+    * plt.show()
