@@ -1,6 +1,10 @@
 1. Interaction bias
-    1. People were asked to draw a shoe for the computer. Most people drew a shoe which is very similar to everyone else. As more people participated in the game, the computer failed to recognize other types of shoes!
+    1. People were asked to draw a shoe for the computer. 
+       Most people drew a shoe which is very similar to everyone else. 
+       As more people participated in the game, the computer failed to recognize other types of shoes!
 2. Latent bias
-    1. If you were training a computer on what a physicist looks like and you are using pictures of past physicists, your algorithm will end up with latent bias skewing towards men.
+    1. If you were training a computer on what a physicist looks like and you are using pictures of past physicists, 
+       your algorithm will end up with latent bias skewing towards men.
 3. Selection bias
-    1. Say you are training a model to recognize faces, where you grab images from the internet or from your own photo library, are you making sure to select photos representing everyone?
+    1. Say you are training a model to recognize faces, where you grab images from the internet or from your own photo library, 
+       are you making sure to select photos representing everyone?
