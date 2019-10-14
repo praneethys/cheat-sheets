@@ -1,19 +1,22 @@
 import pandas as pd
 
-* Pandas series
+* Series: a list-like Pandas object
     * labels = ['a','b','c']
     * my_data = [10,20,30]
     * arr = np.array(my_data)
     * d = {'a':10,'b':20,'c':30}
-    * s1=pd.Series(data=my_data) (you’ll get default labels 0, 1, 2, ..)
-    * s2=pd.Series(data=my_data, index=labels)
-    * s3=pd.Series(arr, labels)
-    * s4=pd.Series(d)
-* DataFrame - creation, read from files
+    * s1=pd.Series(data=my_data, name='s1') (you’ll get default labels 0, 1, 2, ..)
+    * s2=pd.Series(data=my_data, index=labels, name='s2')
+    * s3=pd.Series(data=arr, index=labels, name='s3')
+    * s4=pd.Series(data=d, name='s4')
+    
+* DataFrame
     * What is a DataFrame?
         * a two-dimensional Pandas data structure
         * columns represent features, rows represent items
+        ** If constructed using a dictionary, columns are keys and rows are values
         * analogous to an Excel spreadsheet or SQL table
+        * It's helpful to think of a DataFrame as actually being just a bunch of Series glued together
     * Method 1
         * matrix_data = np.random.randint(1,20,size=20).reshape(5,4)
         * row_labels = ['A','B','C','D','E']
@@ -24,9 +27,23 @@ import pandas as pd
         * df2=pd.DataFrame(data=d,index=['X','Y'])
     * Method 3
         * df3 = pd.read_csv("Data/wine.data.csv")
+        * default indices are 0, 1, 2.. but if you want a specific column to be the index, use index_col=<column_number>
     * Method 4
         * df4 = pd.read_excel("./Data/Height_Weight.xlsx")
+    
+* Writing to CSV
+    * df.to_csv(path_or_buf="file_path")
+
+* Writing to Excel
+    * df.to_excel("file path")
+    * Specific sheet df.to_excel("file_path", sheet_name="sheet1")
+    * Multiple sheets
+    ** with pd.ExcelWriter("path to excel") as writer:
+         df1.to_excel(writer, sheet_name="sheet1")
+         df2.to_excel(writer, sheet_name="sheet2")
+        
 * Quick checking DataFrame
+    * df3.shape
     * df3.head()
     * df3.head(3)
     * df3.tail(7)
@@ -34,12 +51,14 @@ import pandas as pd
     * df3.info()
     * df3.describe().transpose()
     * df4.describe()
+    
 * Descriptive stats on DataFrame
     * df3.mean()
     * df3.std()
     * df4.var()
     * df4.min()
     * df4.max()
+    
 * Indexing, slicing
     * df4['Name']
     * df4[['Name','Weight']]
@@ -49,21 +68,28 @@ import pandas as pd
     * Index position based 'iloc' method can be used for selecting row(s)
         * df.iloc[2]
         * df.iloc[[1,2]]
+        
 * Conditional subsetting
     * df4['Height']>155
     * df4[df4['Height']>155]
     * df4[(df4['Height']>155) & (df4['Weight']<140)]
+    
 * Operations on specific rows/columns
     * df3[['Magnesium','Ash']].std()
     * range_alcohol=df3['Alcohol'].max()- df3['Alcohol'].min()
     * np.percentile(df3['Flavanoids'],95) - Top 5 percentile in terms of Flavanoids?
     * df3[df3['Flavanoids']>=3.4975]
-    * df3[df3['Flavanoids']>=3.4975][['Ash','Alcohol','Magnesium']].mean() - Show the average alcohol, ash, and magnesium content of the wine brands which rank top 5 percent in terms of flavanoids
+    * df3[df3['Flavanoids']>=3.4975][['Ash','Alcohol','Magnesium']].mean() - 
+      Show the average alcohol, ash, and magnesium content of the wine brands which rank top 5 percent in terms of flavanoids
+      
 * Create new column as a function of existing columns
     * df4['BMI']=df4['Weight']*0.453592/(df4['Height']/100)**2
     * df4.sort_values(by='BMI')
     * df4.sort_values(by='BMI',inplace=True) - Use inplace=True to make the changes reflected on the original DataFrame
+
+*    
 * Visualization
+*
     * Set style
         * # Just to set the Matplotlib style to default
         * import matplotlib as mpl
