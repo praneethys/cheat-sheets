@@ -1,5 +1,9 @@
 #include <iostream>
 
+/* ctci_5thEd_13.10
+Write a function for allocating a 2D array so as to minimize calls to malloc
+and make sure the memory is accessible by the notation arr[i][j]
+*/
 int** Malloc2DArray(int rows, int cols)
 {
   std::cout << __func__ << std::endl;
