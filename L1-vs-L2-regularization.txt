@@ -1,0 +1,18 @@
+https://stats.stackexchange.com/questions/184019/when-will-l1-regularization-work-better-than-l2-and-vice-versa#184023
+
+How to decide which regularization (L1 or L2) to use?
+
+What is your goal? Both can improve model generalization by penalizing coefficients, since features with opposite relationship to the outcome can "offset" each other (a large positive value is counterbalanced by a large negative value). This can arise when there are collinear features. Small changes in the data can result in dramatically different parameter estimates (high variance estimates). Penalization can restrain both coefficients to be smaller. (Hastie et al, Elements of Statistical Learning, 2nd edition, p. 63)
+
+What are the pros & cons of each of L1 / L2 regularization?
+
+L1 regularization can address the multicollinearity problem by constraining the coefficient norm and pinning some coefficient values to 0. Computationally, Lasso regression (regression with an L1 penalty) is a quadratic program which requires some special tools to solve. When you have more features than observations 𝑁, lasso will keep at most 𝑁 non-zero coefficients. Depending on context, that might not be what you want.
+
+L1 regularization is sometimes used as a feature selection method. Suppose you have some kind of hard cap on the number of features you can use (because data collection for all features is expensive, or you have tight engineering constraints on how many values you can store, etc.). You can try to tune the L1 penalty to hit your desired number of non-zero features.
+
+L2 regularization can address the multicollinearity problem by constraining the coefficient norm and keeping all the variables. It's unlikely to estimate a coefficient to be exactly 0. This isn't necessarily a drawback, unless a sparse coefficient vector is important for some reason.
+
+In the regression setting, it's the "classic" solution to the problem of estimating a regression with more features than observations. L2 regularization can estimate a coefficient for each feature even if there are more features than observations (indeed, this was the original motivation for "ridge regression").
+
+As an alternative, elastic net allows L1 and L2 regularization as special cases. A typical use-case in for a data scientist in industry is that you just want to pick the best model, but don't necessarily care if it's penalized using L1, L2 or both. Elastic net is nice in situations like these.
+
